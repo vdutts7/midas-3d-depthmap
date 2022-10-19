@@ -10,6 +10,7 @@ class DepthMapper:
 
         
     def setup_model(self, accuracy):
+        # Define model types and load the selected model
         depth_models = {
             1: "MiDaS_small",
             2: "DPT_Hybrid",
@@ -29,4 +30,18 @@ class DepthMapper:
         # Load and set image transformations based on model type
         transforms = torch.hub.load("intel-isl/MiDaS", "transforms")
         self.img_transform = transforms.dpt_transform if accuracy > 1 else transforms.small_transform
+    
+    
+    #...............................
+    
+    
+    def estimate_depth(self, img):
+        # Estimate depth from an image
+        img_prepared = self.prepare_image(img)
+        depth_pred = self.run_model(img_prepared, img.shape[:2])
+        return depth_pred.cpu().numpy()
+    
+    def prepare_image(self, img):
+        # Prepare image for depth estimation
+        return self.img_transform(img).to(self.device)
     
