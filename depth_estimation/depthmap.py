@@ -31,10 +31,6 @@ class DepthMapper:
         transforms = torch.hub.load("intel-isl/MiDaS", "transforms")
         self.img_transform = transforms.dpt_transform if accuracy > 1 else transforms.small_transform
     
-    
-    #...............................
-    
-    
     def estimate_depth(self, img):
         # Estimate depth from an image
         img_prepared = self.prepare_image(img)
@@ -45,3 +41,17 @@ class DepthMapper:
         # Prepare image for depth estimation
         return self.img_transform(img).to(self.device)
     
+    def run_model(self, img_prepared, img_shape):
+        # Execute the model and interpolate the prediction
+        start = perf_counter()
+        with torch.no_grad():
+            depth_pred = self.depth_model(img_prepared)
+            depth_pred = torch.nn.functional.interpolate(
+                depth_pred.unsqueeze(1),
+                size=img_shape,
+                mode="bicubic",
+                align_corners=False,
+            ).squeeze()
+        end = perf_counter()
+        print(f'Modeling time: {end-start:.3f}s')
+        return depth_pred
