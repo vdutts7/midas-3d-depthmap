@@ -11,7 +11,6 @@ class ImageProcessor:
     def __init__(self, data):
         self.data = self.__validate_data(data)
     
-
     # Validate image data
     def __validate_data(self, data):
         if data is None:
@@ -56,3 +55,14 @@ class ImageProcessor:
         result_img = self.__prepare_image_for_display(use_colormap)
         self.__display_image(result_img)
     
+    # Prepare image for display --> apply colormap (if needed)
+    def __prepare_image_for_display(self, use_colormap):
+        apply_colormap = lambda img: cv2.applyColorMap(img, cv2.COLORMAP_JET)
+        return apply_colormap(self.data) if use_colormap else self.data
+    
+    # Display image (via matplotlib)
+    @staticmethod
+    def __display_image(image):
+        print("Rendering image...")
+        plt.axis("off")
+        plt.imshow(image)
