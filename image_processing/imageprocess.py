@@ -23,12 +23,29 @@ class ImageProcessor:
     def from_ndarray(cls, ndarray):
         return cls(data=ndarray)
 
+
+    # Load image from disk --> convert to RGB
+    @classmethod
+    def load_from_disk(cls, path):
+        img_rgb = cls.__read_and_convert_image(path)
+        return cls(data=img_rgb)
+    
+    # Read image from path --> convert to RGB
+    @staticmethod
+    def __read_and_convert_image(path):
+        if not os.path.isfile(path):
+            raise FileNotFoundError(f'Image \"{path}\" not found.')
+        
+        img_data = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+        return cv2.cvtColor(img_data, cv2.COLOR_BGR2RGB)
+    
+
     # Return image dimensions
     @property
     def dimensions(self) -> tuple:
         return self.data.shape
     
-    
+
     # Apply colormap to image data
     def apply_colormap(self, img_data) -> np.ndarray:
         img_normalized = img_data.astype(np.uint8)
