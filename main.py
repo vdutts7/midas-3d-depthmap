@@ -1,6 +1,9 @@
 import os
 import argparse
-# TODO: depth estimate func 
+from image_processing import ImageProcessor
+
+from depth_estimation import DepthMapper
+
 
 # Sets up the command line argument parser
 def setup_arg_parser() -> argparse.ArgumentParser:
@@ -15,5 +18,11 @@ def add_arguments_to_parser(parser):
 
 
 # Processes the image and returns a depth image
+def process_image(image_path, accuracy_level):
+    depth_estimator = DepthMapper(accuracy_level)
+    img_instance = ImageProcessor.from_file(image_path)
+    estimated_depth = depth_estimator.estimate_depth(img_instance.image)
+    return ImageProcessor.from_array(estimated_depth)
+
 
 # Main execution function (something...)
