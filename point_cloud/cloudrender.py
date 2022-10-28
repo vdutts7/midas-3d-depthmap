@@ -28,7 +28,6 @@ class CloudRenderer:
 
 
 
-
     # Generates depth points from depth data using normalization factor
     def _generate_depth_points(self, normalization_factor) -> np.ndarray:
         depth_points = []
@@ -50,10 +49,26 @@ class CloudRenderer:
     def display_cloud(self):
         self._display_geometry(self.point_cloud)
         
+        
     # Displays a voxel grid created from the point cloud
     def display_voxel_grid(self):
         voxel_grid = self._create_voxel_grid()
         self._display_geometry(voxel_grid)
 
 
+
+    # Creates a voxel grid from the point cloud
+    def _create_voxel_grid(self):
+        cloud = self._generate_point_cloud()
+        cloud.scale(1 / np.max(cloud.get_max_bound() - cloud.get_min_bound()), center=cloud.get_center())
+        cloud.colors = o3d.utility.Vector3dVector(np.random.uniform(0, 1, size=(1000, 3)))
+        return o3d.geometry.VoxelGrid.create_from_point_cloud(cloud, voxel_size=0.01)
+
+    # Generic method to display any 3D geometry
+    def _display_geometry(self, geometry):
+        try: 
+            print(f'Displaying 3D geometry for {self.processed_data.shape[0]:,} points')                
+            o3d.visualization.draw_geometries([geometry])
+        except Exception as e:
+            print(f'Error displaying geometry: {e}')
  

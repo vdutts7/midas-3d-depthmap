@@ -1,7 +1,7 @@
 import os
 import argparse
 from image_processing import ImageProcessor
-
+from point_cloud import CloudRenderer
 from depth_estimation import DepthMapper
 
 
