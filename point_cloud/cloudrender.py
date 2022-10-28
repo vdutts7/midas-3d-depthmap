@@ -39,10 +39,21 @@ class CloudRenderer:
                 depth_points.append(point)
         return np.array(depth_points)
 
-    # TODO: Generate point cloud from processed depth points
- 
-    # TODO: Displays point cloud
 
-    # TODO: display voxel grid
+    # Generates a point cloud from processed depth points
+    def _generate_point_cloud(self):
+        cloud = o3d.geometry.PointCloud()
+        cloud.points = o3d.utility.Vector3dVector(self.processed_data)
+        return cloud
+        
+    # Displays the point cloud
+    def display_cloud(self):
+        self._display_geometry(self.point_cloud)
+        
+    # Displays a voxel grid created from the point cloud
+    def display_voxel_grid(self):
+        voxel_grid = self._create_voxel_grid()
+        self._display_geometry(voxel_grid)
+
 
  
