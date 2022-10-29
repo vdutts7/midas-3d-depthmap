@@ -25,4 +25,28 @@ def process_image(image_path, accuracy_level):
     return ImageProcessor.from_array(estimated_depth)
 
 
-# Main execution function (something...)
+# Visualizes the depth image using a point cloud
+def visualize_depth_image(depth_img):
+    visualizer = CloudRenderer(depth_img.image)
+    visualizer.render_cloud()
+
+
+# Main execution function 
+def execute():
+    cmd_args = setup_arg_parser().parse_args()
+    img_file_path = construct_image_path(cmd_args.input_img)
+    depth_img = process_image(img_file_path, cmd_args.accuracy_level)
+    visualize_depth_image(depth_img)
+
+
+
+# Constructs the full path to the image file
+def construct_image_path(image_name):
+    return os.path.join(os.getcwd(), "images", image_name)
+
+
+
+
+
+if __name__ == "__main__":
+    execute()
