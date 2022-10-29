@@ -8,7 +8,6 @@ class DepthMapper:
         self.setup_device()
         self.setup_transforms(accuracy)
 
-        
     def setup_model(self, accuracy):
         # Define model types and load the selected model
         depth_models = {

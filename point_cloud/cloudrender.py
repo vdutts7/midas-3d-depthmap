@@ -3,9 +3,7 @@ import open3d as o3d
 from tqdm import tqdm
 
 # Class for rendering point clouds from depth data
-
 class CloudRenderer:
-
     def __init__(self, depth_data):
         # Initialize with depth data and process it
         self.depth_data = depth_data
@@ -19,14 +17,10 @@ class CloudRenderer:
         print(f'Processed depth data from shape {self.depth_data.shape} to {depth_points.shape}')
         return depth_points 
 
-
-
     # Calculates normalization factor for depth data
     def _calculate_normalization_factor(self) -> float:
         normalize = lambda d: sum(d) / len(d)
         return normalize(self.depth_data.shape) / self.depth_data.max()
-
-
 
     # Generates depth points from depth data using normalization factor
     def _generate_depth_points(self, normalization_factor) -> np.ndarray:
@@ -38,7 +32,6 @@ class CloudRenderer:
                 depth_points.append(point)
         return np.array(depth_points)
 
-
     # Generates a point cloud from processed depth points
     def _generate_point_cloud(self):
         cloud = o3d.geometry.PointCloud()
@@ -49,13 +42,11 @@ class CloudRenderer:
     def display_cloud(self):
         self._display_geometry(self.point_cloud)
         
-        
+
     # Displays a voxel grid created from the point cloud
     def display_voxel_grid(self):
         voxel_grid = self._create_voxel_grid()
         self._display_geometry(voxel_grid)
-
-
 
     # Creates a voxel grid from the point cloud
     def _create_voxel_grid(self):
@@ -63,6 +54,8 @@ class CloudRenderer:
         cloud.scale(1 / np.max(cloud.get_max_bound() - cloud.get_min_bound()), center=cloud.get_center())
         cloud.colors = o3d.utility.Vector3dVector(np.random.uniform(0, 1, size=(1000, 3)))
         return o3d.geometry.VoxelGrid.create_from_point_cloud(cloud, voxel_size=0.01)
+
+
 
     # Generic method to display any 3D geometry
     def _display_geometry(self, geometry):

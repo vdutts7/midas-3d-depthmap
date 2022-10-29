@@ -2,3 +2,6 @@ torch
 torchvision
 
 opencv-python
+open3d
+
+timm

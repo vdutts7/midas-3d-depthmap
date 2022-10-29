@@ -4,9 +4,7 @@ import matplotlib.pyplot as plt
 
 import cv2 #OpenCV-python
 
-
 class ImageProcessor:
-
     # Initialize w/ image data
     def __init__(self, data):
         self.data = self.__validate_data(data)
@@ -21,7 +19,6 @@ class ImageProcessor:
     @classmethod
     def from_ndarray(cls, ndarray):
         return cls(data=ndarray)
-
 
     # Load image from disk --> convert to RGB
     @classmethod
