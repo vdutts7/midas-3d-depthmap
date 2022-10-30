@@ -77,7 +77,7 @@ pip install -r requirements.txt
 When running the model on a chosen image, swap out the `PHOTO` placeholder with the complete file path and extension of the target image. For the `--accuracy_level` setting, select an integer from 1 to 3 (where 1 delivers the quickest inference speed but with less accuracy, and 3 ensures the highest accuracy, albeit with a slower inference speed).
 
 ```bash
-python3 main.py --accuracy_level [1|2|3] --input_img FILENAME
+python3 main.py --accuracy_level [1|2|3] --input_img PHOTO
 ```
 
 
