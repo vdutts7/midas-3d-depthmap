@@ -88,8 +88,8 @@ src="https://img.shields.io/badge/pyTorch-EE4C2C?style=for-the-badge&logo=pyTorc
 alt="pyTorch"
 />
 <img
-src="https://img.shields.io/badge/MiDaS-EE4C2C?style=for-the-badge&logoColor=white&color=00b5ff"
-alt="MiDaS"
+src="https://img.shields.io/badge/MiDaS (Monocular Depth Estimation with a Single Image)-EE4C2C?style=for-the-badge&logoColor=white&color=00b5ff"
+alt="MiDaS (Monocular Depth Estimation with a Single Image)"
 />
 <img
 src="https://img.shields.io/badge/OpenCV-FF6F00?style=for-the-badge&logo=opencv&logoColor=0166ff&color=black"
