@@ -101,7 +101,7 @@ alt="matplotlib"
 />
 
 <img
-  src="https://img.shields.io/badge/C++-4F4F4F?style=for-the-badge&color=black"
+  src="https://img.shields.io/badge/Open3D-4F4F4F?style=for-the-badge&color=black"
   alt="Open3D"
 />
 
